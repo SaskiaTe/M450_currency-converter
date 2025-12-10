@@ -1,26 +1,8 @@
-import { decodeBase64 } from "@std/encoding/base64";
+import { RequestParam, RouteParam } from "./types.ts";
+import { authenticate, getConversion, getRate, putRate } from "./endpoints.ts";
 
 const responseHeaders = {
   "content-type": "application/json; charset=utf-8",
-};
-
-type RequestParam = {
-  fromCurrency: string;
-  toCurrency: string;
-  value: number;
-};
-
-type RouteParam = {
-  method: string;
-  pattern: RegExp;
-  capture: (m: Array<string>) => RequestParam;
-  authenticate: (r: Request) => boolean;
-  handle: (r: Request, p: RequestParam) => Response;
-};
-
-const credentials = {
-  user: "banker",
-  password: "iLikeMoney",
 };
 
 // GET /rate/{fromCurrency}/{toCurrency}
@@ -49,16 +31,7 @@ const router: Array<RouteParam> = [
         value: Number.parseFloat(m[3]),
       };
     },
-    authenticate: (r: Request) => {
-      const auth = r.headers.get("authorization") || "";
-      const match = /^Basic ([A-Za-z0-9+/]+)=*$/.exec(auth);
-      if (match === null) {
-        return false;
-      }
-      const credentials = new TextDecoder().decode(decodeBase64(match[1]));
-      console.log(credentials);
-      return true;
-    },
+    authenticate: authenticate,
     handle: putRate,
   },
   {
@@ -78,21 +51,6 @@ const router: Array<RouteParam> = [
     handle: getConversion,
   },
 ];
-
-function getRate(_req: Request, data: RequestParam): Response {
-  console.log(data);
-  return new Response("getRate");
-}
-
-function putRate(_req: Request, data: RequestParam): Response {
-  console.log(data);
-  return new Response("putRate");
-}
-
-function getConversion(_req: Request, data: RequestParam): Response {
-  console.log(data);
-  return new Response("getConversion");
-}
 
 Deno.serve((req) => {
   const url = new URL(req.url);
