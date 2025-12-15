@@ -1,0 +1,43 @@
+curl – HTTP- und REST-API-Tests
+curl dient zum Absetzen von HTTP-Anfragen:
+GET-Requests über einfache URLs
+Andere HTTP-Methoden (POST, PUT usw.) mit -X
+Senden von JSON-Payloads mit -d und Content-Type
+Basic Authentication mit -u benutzer:passwort
+Aushandeln des Antwortformats ueber den Accept-Header
+curl bildet die Basis fuer automatisierte API-Tests.
+
+jq – JSON-Auswertung
+jq wird genutzt, um JSON-Antworten von curl zu verarbeiten:
+Formatierte Ausgabe von JSON
+Zugriff auf einzelne Felder mit .field
+Roh-Ausgabe ohne Anführungszeichen mit -r
+Iteration über Arrays mit .[]
+Extraktion einzelner Werte aus Listen
+Damit lassen sich API-Antworten gezielt prüfen.
+
+Bash – Testlogik und Automatisierung
+Bash verbindet die Werkzeuge und steuert die Testlogik:
+Here Documents zur Erzeugung von Testdaten
+Subshells zur Speicherung von Kommandoausgaben in Variablen
+if/else fuer Vergleiche von Strings und Zahlen
+Exit Codes zur Erfolgskontrolle von Tests
+Erzeugung von Zufallszahlen
+Schleifen (for, seq) fuer wiederholte Tests
+Ganzzahl- und Gleitkommaberechnungen
+Pipelines zur Kombination mehrerer Werkzeuge
+Formatierte Ausgaben mit printf
+Traps fuer Aufräumarbeiten bei Skriptende
+Logische Operatoren && und || zur Verkettung von Befehlen
+Bash stellt damit das Rückgrat der Testautomatisierung dar.
+
+AWK – Text- und Datenauswertung
+AWK wird eingesetzt, um textuelle Ausgaben zu analysieren:
+Verarbeitung von Dateien zeilen- und spaltenweise
+Struktur mit BEGIN, Hauptblock und END
+Zugriff auf Zeilen ($0), Spalten ($1, $2, …), Zeilennummer (NR) und Spaltenanzahl (NF)
+Berechnung von Summen
+Verwendung normaler und assoziativer Arrays
+Zählen von Vorkommnissen
+Kombination mit sort für Ranglisten und Auswertungen
+AWK eignet sich besonders für einfache, aber leistungsfaehige Auswertungen von Testergebnissen.
